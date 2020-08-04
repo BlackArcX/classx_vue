@@ -10,7 +10,9 @@ module.exports = {
     './src/**/*.tsx',
   ],
   theme: {},
-  variants: {},
+  variants: {
+    borderWidth: ['responsive', 'first', 'hover', 'focus'],
+  },
   plugins: [
     require('@tailwindcss/custom-forms'),
     require('./theme.config'),
@@ -25,7 +27,4 @@ module.exports = {
     }),
 
   ],
-  variants: {
-    borderWidth: ['responsive', 'first', 'hover', 'focus'],
-  },
 };
