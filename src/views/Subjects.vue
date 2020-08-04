@@ -3,7 +3,7 @@
     <h1 class="text-lg leading-6 font-medium text-gray-900 py-4">Semester 04</h1>
     <div class="bg-white shadow overflow-hidden sm:rounded-md">
       <ul>
-        <li class="border-t border-border-light" v-for="subject in subjects" :key="subject.id">
+        <li class="border-t border-border-light first:border-t-0" v-for="subject in subjects" :key="subject.id">
           <router-link :to="{name: 'subject:detail', params: {id: subject.id}}" class="block hover:bg-white-light focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
             <div class="flex items-center px-4 py-4 sm:px-6">
               <div class="flex-shrink-0">
