@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-3">
-    <h1 class="text-lg leading-6 font-medium text-gray-900 py-4">Semester 04</h1>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-lg leading-6 font-medium text-gray-900 py-4 mt-3">Semester 04</h1>
     <div class="bg-white shadow overflow-hidden sm:rounded-md">
       <ul>
         <li class="border-t border-border-light first:border-t-0" v-for="subject in subjects" :key="subject.id">
