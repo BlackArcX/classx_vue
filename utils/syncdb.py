@@ -46,6 +46,6 @@ def update_collections(obj: dict, base_doc):
 
 
 if __name__ == '__main__':
-    with open('data/cs2.json') as f:
+    with open('data/classes.json') as f:
         data = json.load(f)
         update_collections(get_val(data), db)
