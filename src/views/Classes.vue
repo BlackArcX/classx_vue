@@ -8,9 +8,9 @@
       </div>
     </header>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-3">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div v-for="university in universities" :key="university.name">
-        <h1 class="text-lg leading-6 font-medium text-gray-900 py-4">{{university.name}}</h1>
+        <h1 class="text-lg leading-6 font-medium text-gray-900 py-3 mt-4">{{university.name}}</h1>
 
         <div class="bg-white shadow overflow-hidden sm:rounded-md">
           <ul>

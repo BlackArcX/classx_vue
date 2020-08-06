@@ -27,8 +27,8 @@
       </div>
     </header>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-3">
-      <h1 class="text-lg leading-6 font-medium text-gray-900 py-4">Resources</h1>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-lg leading-6 font-medium text-gray-900 py-3 mt-4">Resources</h1>
 
       <div class="bg-white shadow overflow-hidden sm:rounded-md">
         <ul>
