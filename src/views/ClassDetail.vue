@@ -9,14 +9,14 @@
     </header>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-3">
-      <div v-for="university in universities" :key="university.name">
-        <h1 class="text-lg leading-6 font-medium text-gray-900 py-4">{{university.name}}</h1>
+      <div v-for="semester in this.classes[this.$route.params.id]" :key="semester.name">
+        <h1 class="text-lg leading-6 font-medium text-gray-900 py-4">{{semester.name}}</h1>
 
         <div class="bg-white shadow overflow-hidden sm:rounded-md">
           <ul>
-            <li class="border-t border-border-light first:border-t-0" v-for="cls in university.classes" :key="cls.id">
+            <li class="border-t border-border-light first:border-t-0" v-for="course in semester.courses" :key="course.id">
 
-              <router-link :to="{name: 'classes:detail', params: {id: cls.id}}" class="block hover:bg-white-light focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
+              <router-link :to="{name: 'classes:detail', params: {id: course.id}}" class="block hover:bg-white-light focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
                 <div class="flex items-center px-4 py-4 sm:px-6">
                   <div class="flex-shrink-0">
                     <div class="h-10 w-10 mr-3 bg-primary-light rounded-full flex items-center justify-center">
@@ -27,8 +27,8 @@
                   </div>
 
                   <div class="min-w-0 flex-1 flex flex-col">
-                    <div class="text-sm leading-5 font-medium text-accent truncate">{{cls.name}}</div>
-                    <div class="mt-2 text-sm leading-5 text-primary-light truncate">{{cls.representative}}</div>
+                    <div class="text-sm leading-5 font-medium text-accent truncate">{{course.title}}</div>
+                    <div class="mt-2 text-sm leading-5 text-primary-light truncate">{{course.code}} - {{course.teacher}}</div>
                   </div>
 
                   <div>
@@ -48,17 +48,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   created() {
-    this.$store.dispatch('classes/subscribe');
+    this.$store.dispatch('subjects/fetchClassSubjects', this.$route.params.id);
   },
   computed: {
-    ...mapGetters('classes', ['universities']),
-  },
-  destroyed() {
-    this.$store.commit('classes/unsubscribe');
+    ...mapState('subjects', ['classes']),
   },
 };
 </script>
