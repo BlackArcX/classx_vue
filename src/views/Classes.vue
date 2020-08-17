@@ -2,9 +2,15 @@
   <div>
     <header class="bg-white shadow-sm">
       <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-md leading-6 font-medium text-primary-dark">
-          All Classes
-        </h1>
+        <header class="bg-white shadow-sm">
+          <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center text-sm leading-5 font-medium">
+              <a class="text-primary-dark hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
+                Classes
+              </a>
+            </nav>
+          </div>
+        </header>
       </div>
     </header>
 

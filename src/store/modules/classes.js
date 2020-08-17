@@ -25,7 +25,6 @@ export default {
       const unsubFn = classesCollection.onSnapshot((snapshot) => {
         const classesArray = [];
         snapshot.forEach((doc) => {
-          console.log(doc.data());
           classesArray.push({
             id: doc.id,
             ...doc.data(),

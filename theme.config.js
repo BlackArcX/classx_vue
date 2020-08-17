@@ -83,7 +83,7 @@ const light = new Theme()
 
     'border-light': palette.blueGray['50'],
     border: palette.blueGray['100'],
-    'border-focus': palette.blueGray['300'],
+    'border-dark': palette.blueGray['300'],
   });
 
 module.exports = new ThemeBuilder()

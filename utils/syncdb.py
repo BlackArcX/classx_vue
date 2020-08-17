@@ -30,7 +30,7 @@ def update_document(obj, document):
     sub_collections = {el[0][6:]: el[1] for el in filter(lambda el: el[0].startswith('sub://'), obj.items())}
     obj = dict(filter(lambda el: not el[0].startswith('sub://'), obj.items()))
 
-    document.set(obj)
+    document.update(obj)
     print(f"updated {document.path}")
 
     update_collections(sub_collections, document)

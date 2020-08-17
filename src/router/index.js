@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/classes/:id',
     name: 'classes:detail',
-    component: () => import(/* webpackChunkName: "classes" */ '@/views/ClassDetail.vue'),
+    component: () => import(/* webpackChunkName: "classes" */ '@/views/ClassCourses.vue'),
   },
 ];
 
