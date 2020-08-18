@@ -1,91 +1,51 @@
 /* eslint-disable import/no-extraneous-dependencies */
-
 const { ThemeBuilder, Theme } = require('tailwindcss-theming');
-
-const palette = {
-  white: '#fff',
-  black: '#000',
-
-  blueGray: {
-    50: '#eceff1',
-    100: '#cfd8dc',
-    200: '#b0bec5',
-    300: '#90a4ae',
-    400: '#78909c',
-    500: '#607d8b',
-    600: '#546e7a',
-    700: '#455a64',
-    800: '#37474f',
-    900: '#263238',
-  },
-  gray: {
-    50: '#fafafa',
-    100: '#f5f5f5',
-    200: '#eeeeee',
-    300: '#e0e0e0',
-    400: '#bdbdbd',
-    500: '#9e9e9e',
-    600: '#757575',
-    700: '#616161',
-    800: '#424242',
-    900: '#212121',
-  },
-  green: {
-    50: '#e8f5e9',
-    100: '#c8e6c9',
-    200: '#a5d6a7',
-    300: '#81c784',
-    400: '#66bb6a',
-    500: '#4caf50',
-    600: '#43a047',
-    700: '#388e3c',
-    800: '#2e7d32',
-    900: '#1b5e20',
-  },
-  indigo: {
-    50: '#e8eaf6',
-    100: '#c5cae9',
-    200: '#9fa8da',
-    300: '#7986cb',
-    400: '#5c6bc0',
-    500: '#3f51b5',
-    600: '#3949ab',
-    700: '#303f9f',
-    800: '#283593',
-    900: '#1a237e',
-  },
-};
+const c = require('tinycolor2');
 
 const light = new Theme()
+  .name('light')
   .colors({
     transparent: 'transparent',
-    black: palette.black,
-    dark: palette.blueGray['700'],
-    'dark-lighter': palette.blueGray['500'],
-    darker: palette.blueGray['900'],
+    black: '#000',
+    white: '#fff',
 
-    white: palette.white,
-    'white-light': palette.gray['50'],
-    'white-dark': palette.blueGray['50'],
+    primary: '#455a64',
+    'primary-dark': '#1c313a',
+    'primary-light': '#718792',
 
-    primary: palette.blueGray['700'],
-    'primary-dark': palette.blueGray['800'],
-    'primary-light': palette.blueGray['600'],
-    success: palette.green['600'],
+    background: '#eceff1',
+    surface: '#fff',
+    error: '#e53935',
+    success: '#43a047',
+    info: '#1e88e5',
 
-    accent: palette.indigo['600'],
-    'accent-dark': palette.indigo['800'],
+    'on-primary': '#fff',
+    'on-background': '#212121',
+    'on-surface': '#212121',
+    'on-error': '#fff',
 
-    'on-primary': palette.white,
-    'on-primary-light': palette.blueGray['50'],
-    'on-background': palette.gray['900'],
-    'on-background-light': palette.gray['600'],
+    border: '#cfd8dc',
+  })
+  .opacityVariant('80', 0.80)
+  .opacityVariant('75', 0.75)
+  .opacityVariant('60', 0.60)
+  .colorVariant('dark', c('#cfd8dc').darken().toHexString(), 'border')
+  .colorVariant('dark', c('#ffffff').darken().toHexString(), 'surface');
 
-    'border-light': palette.blueGray['50'],
-    border: palette.blueGray['100'],
-    'border-dark': palette.blueGray['300'],
-  });
+const dark = new Theme()
+  .name('dark')
+  .colors({
+    background: '#263238',
+    surface: c('#263238').lighten(3).toHexString(),
+
+    'on-background': '#fff',
+    'on-surface': '#fff',
+    border: c('#455a64').darken(3).toHexString(),
+  })
+  .colorVariant('dark', c('#455a64').lighten(20).toString('hex6'), 'border')
+  .colorVariant('dark', c('#263238').lighten(5).toHexString(), 'surface');
 
 module.exports = new ThemeBuilder()
   .asClass()
-  .default(light);
+  .default(light)
+  .dark(dark);

@@ -40,3 +40,27 @@ body {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
+
+.bg-primary,
+.bg-surface,
+.bg-background{
+    transition-property: background-color;
+    @apply duration-200 ease-in-out;
+}
+
+.text-on-primary,
+.text-on-surface,
+.text-on-background,
+.text-border-dark,
+.text-on-background-75,
+.text-on-surface-60 {
+    transition-property: color;
+    @apply duration-200 ease-in-out;
+}
+
+.border-border-75,
+.border-border,
+.border-border-dark {
+    transition-property: border-color;
+    @apply duration-200 ease-in-out;
+}

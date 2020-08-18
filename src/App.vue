@@ -1,5 +1,5 @@
 <template>
-  <div class="antialiased bg-white-dark h-full">
+  <div class="antialiased bg-background h-full">
     <Header></Header>
     <main>
         <router-view/>

@@ -6,11 +6,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
     path: '/subjects',
     name: 'subjects',
     component: () => import(/* webpackChunkName: "subjects" */ '@/views/Subjects.vue'),
@@ -26,9 +21,24 @@ const routes = [
     component: () => import(/* webpackChunkName: "classes" */ '@/views/Classes.vue'),
   },
   {
-    path: '/classes/:id',
-    name: 'classes:detail',
+    path: '/classes/:class/:course/resources/add',
+    name: 'resources:add',
+    component: () => import(/* webpackChunkName: "resources" */ '@/views/AddResource.vue'),
+  },
+  {
+    path: '/classes/:class/:course',
+    name: 'course:resources',
+    component: () => import(/* webpackChunkName: "classes" */ '@/views/CourseResources.vue'),
+  },
+  {
+    path: '/classes/:class',
+    name: 'class:courses',
     component: () => import(/* webpackChunkName: "classes" */ '@/views/ClassCourses.vue'),
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
   },
 ];
 

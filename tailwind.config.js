@@ -9,7 +9,13 @@ module.exports = {
     './src/**/*.ts',
     './src/**/*.tsx',
   ],
-  theme: {},
+  theme: {
+    extend: {
+      width: {
+        11: '2.75rem',
+      },
+    },
+  },
   variants: {
     borderWidth: ['responsive', 'first', 'hover', 'focus'],
     display: ['responsive', 'last'],

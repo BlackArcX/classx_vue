@@ -1,9 +1,9 @@
 <template>
   <div>
-    <header class="bg-white shadow-sm">
+    <header class="bg-surface shadow-sm">
       <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <nav class="flex items-center text-sm leading-5 font-medium">
-          <a class="text-primary-dark hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
+          <a class="text-on-surface-75 hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
             Classes
           </a>
           <svg class="flex-shrink-0 mx-2 h-5 w-5 text-border-dark last:hidden" fill="currentColor"
@@ -11,7 +11,7 @@
             <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path>
           </svg>
-          <a class="text-primary-dark hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
+          <a class="text-on-surface-75 hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
             FA18-BCS-162@LHR
           </a>
           <svg class="flex-shrink-0 mx-2 h-5 w-5 text-border-dark last:hidden" fill="currentColor"
@@ -24,20 +24,20 @@
     </header>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div v-for="semester in this.classes[this.$route.params.id]" :key="semester.name">
-        <h1 class="text-lg leading-6 font-medium text-gray-900 py-3 mt-4">{{semester.name}}</h1>
+      <div v-for="semester in classes[$route.params.class]" :key="semester.name">
+        <h1 class="text-lg leading-6 font-medium text-on-surface py-3 mt-4">{{semester.name}}</h1>
 
-        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+        <div class="bg-surface shadow overflow-hidden sm:rounded-md">
           <ul>
-            <li class="border-t border-border-light first:border-t-0"
+            <li class="border-t border-border-75 first:border-t-0"
                 v-for="course in semester.courses" :key="course.id">
 
-              <router-link :to="{name: 'classes:detail', params: {id: course.id}}"
-                           class="block hover:bg-white-light focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
+              <router-link :to="{name: 'course:resources', params: {'class': $route.params.class, 'course': course.code, }}"
+                           class="block hover:bg-surface-dark focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
                 <div class="flex items-center px-4 py-4 sm:px-6">
                   <div class="flex-shrink-0">
                     <div
-                      class="h-10 w-10 mr-3 bg-primary-light rounded-full flex items-center justify-center">
+                      class="h-10 w-10 mr-3 bg-primary rounded-full flex items-center justify-center">
                       <svg class="text-on-primary h-5 w-5" fill="none" stroke-linecap="round"
                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                            stroke="currentColor">
@@ -48,16 +48,16 @@
                   </div>
 
                   <div class="min-w-0 flex-1 flex flex-col">
-                    <div class="text-sm leading-5 font-medium text-accent truncate">
+                    <div class="text-sm leading-5 font-medium text-on-surface truncate">
                       {{course.title}}
                     </div>
-                    <div class="mt-2 text-sm leading-5 text-primary-light truncate">{{course.code}}
+                    <div class="mt-2 text-sm leading-5 text-on-surface-60 truncate">{{course.code}}
                       - {{course.teacher}}
                     </div>
                   </div>
 
                   <div>
-                    <svg class="h-5 w-5 text-on-background-light" viewBox="0 0 20 20"
+                    <svg class="h-5 w-5 text-on-background-75" viewBox="0 0 20 20"
                          fill="currentColor">
                       <path fill-rule="evenodd"
                             d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -76,14 +76,14 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+import { mapState } from 'vuex';
 
-  export default {
-    created() {
-      this.$store.dispatch('subjects/fetchClassSubjects', this.$route.params.id);
-    },
-    computed: {
-      ...mapState('subjects', ['classes']),
-    },
-  };
+export default {
+  created() {
+    this.$store.dispatch('subjects/fetchClassSubjects', this.$route.params.class);
+  },
+  computed: {
+    ...mapState('subjects', ['classes']),
+  },
+};
 </script>

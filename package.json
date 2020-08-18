@@ -32,6 +32,7 @@
     "polished": "^3.6.5",
     "tailwindcss": "^1.6.2",
     "tailwindcss-theming": "^2.4.3",
+    "tinycolor2": "^1.4.1",
     "vue-cli-plugin-tailwind": "^1.4.1",
     "vue-clickaway": "^2.2.2",
     "vue-template-compiler": "^2.6.11"
