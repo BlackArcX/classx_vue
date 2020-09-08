@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 firebase-admin = "*"
 scrapy = "*"
+click = "*"
+python-slugify = "*"
 
 [requires]
 python_version = "3.8"
