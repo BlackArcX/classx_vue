@@ -76,17 +76,21 @@ export default {
         // todo: get exact routed redirected from
         if (route.redirectedFrom) {
           route = {
-            ...route.matched[0],
-            query: route.query,
-            params: route.params,
+            ...route,
+            path: route.matched[0].path,
+            fullPath: route.matched[0].fullPath,
+            name: route.matched[0].name,
+            meta: route.matched[0].meta,
           };
+
+          delete route.redirectedFrom;
         }
 
         const matched = this.$router.options.routes.find(
           (e) => e.path === route.matched[0].path
             || (route.matched[0].name && e.name === route.matched[0].name),
         );
-        if (matched && matched.children && route.matched.length === 1) {
+        if (matched && matched.children) {
           submenuItems = matched.children.map((e) => {
             if (typeof e.meta?.title === 'function') {
               e.meta.title = e.meta.title(route);

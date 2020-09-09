@@ -29,6 +29,7 @@ const routes = [
     path: '/classes/:class/:course',
     component: () => import(/* webpackChunkName: "course" */ '@/views/CourseDetail.vue'),
     name: 'course:details',
+    redirect: { name: 'course:resources' },
     meta: {
       title: (route) => route.params.course,
     },
