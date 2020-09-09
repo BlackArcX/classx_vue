@@ -15,8 +15,8 @@ export default {
   actions: {
     async fetchCourse({ commit }, { cls, courseCode }) {
       const clsRef = db.doc(`/classes/${cls}`);
-      const courses = await db.collection('registeredCourses')
-        .where('classRef', '==', clsRef)
+      const courses = await db.collection('subjects')
+        .where('class', '==', clsRef)
         .where('code', '==', courseCode)
         .get();
 

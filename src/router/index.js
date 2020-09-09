@@ -6,6 +6,11 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/teachers/:id',
+    name: 'teacher:profile',
+    component: () => import(/* webpackChunkName: "teachers" */ '@/views/TeacherProfile.vue'),
+  },
+  {
     path: '/subjects',
     name: 'subjects',
     component: () => import(/* webpackChunkName: "subjects" */ '@/views/Subjects.vue'),
@@ -16,28 +21,57 @@ const routes = [
     component: () => import(/* webpackChunkName: "subjects" */ '@/views/SubjectDetail.vue'),
   },
   {
-    path: '/classes',
-    name: 'classes',
-    component: () => import(/* webpackChunkName: "classes" */ '@/views/Classes.vue'),
-  },
-  {
     path: '/classes/:class/:course/resources/add',
     name: 'resources:add',
     component: () => import(/* webpackChunkName: "resources" */ '@/views/AddResource.vue'),
   },
   {
     path: '/classes/:class/:course',
-    name: 'course:resources',
-    component: () => import(/* webpackChunkName: "classes" */ '@/views/CourseResources.vue'),
+    component: () => import(/* webpackChunkName: "course" */ '@/views/CourseDetail.vue'),
+    name: 'course:details',
+    meta: {
+      title: (route) => route.params.course,
+    },
+    children: [
+      {
+        path: 'resources',
+        name: 'course:resources',
+        component: () => import(/* webpackChunkName: "course" */ '@/views/CourseResources.vue'),
+        meta: { title: 'Resources' },
+      },
+      {
+        path: 'tasks',
+        name: 'course:tasks',
+        component: () => import(/* webpackChunkName: "course" */ '@/views/CourseResources.vue'),
+        meta: { title: 'Tasks' },
+      },
+      {
+        path: 'about',
+        name: 'course:about',
+        component: () => import(/* webpackChunkName: "course" */ '@/views/CourseResources.vue'),
+        meta: { title: 'About' },
+      },
+    ],
   },
   {
     path: '/classes/:class',
     name: 'class:courses',
     component: () => import(/* webpackChunkName: "classes" */ '@/views/ClassCourses.vue'),
+    meta: {
+      title: (route) => route.params.class,
+    },
+  },
+  {
+    path: '/classes',
+    name: 'classes',
+    component: () => import(/* webpackChunkName: "classes" */ '@/views/Classes.vue'),
+    meta: {
+      title: 'Classes',
+    },
   },
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home,
   },
 ];

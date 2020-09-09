@@ -4,12 +4,12 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center h-16">
           <div>
-            <h1 class="inline-flex items-center font-medium leading-5 text-on-surface text-lg">
+            <router-link :to="{name: 'home'}" class="inline-flex items-center font-medium leading-5 text-on-surface text-lg">
               Class Resources
-            </h1>
+            </router-link>
           </div>
           <div class="flex-1 w-full">
-            <label for="search" class="sr-only">Search projects</label>
+            <label for="search" class="sr-only">Search</label>
 
             <div class="relative max-w-lg mx-auto text-on-surface-60 focus-within:text-black">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

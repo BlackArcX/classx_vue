@@ -1,30 +1,6 @@
 <template>
-  <div>
-    <header class="bg-surface shadow-sm">
-      <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <nav class="flex items-center text-sm leading-5 font-medium">
-          <a class="text-on-surface-75 hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
-            Classes
-          </a>
-          <svg class="flex-shrink-0 mx-2 h-5 w-5 text-border-dark last:hidden" fill="currentColor"
-               viewBox="0 0 20 20">
-            <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path>
-          </svg>
-          <a class="text-on-surface-75 hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
-            FA18-BCS-162@LHR
-          </a>
-          <svg class="flex-shrink-0 mx-2 h-5 w-5 text-border-dark last:hidden" fill="currentColor"
-               viewBox="0 0 20 20">
-            <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"></path>
-          </svg>
-        </nav>
-      </div>
-    </header>
-
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div v-for="semester in classes[$route.params.class]" :key="semester.name">
+  <Page>
+    <div v-for="semester in classes[$route.params.class]" :key="semester.name">
         <h1 class="text-lg leading-6 font-medium text-on-surface py-3 mt-4">{{semester.name}}</h1>
 
         <div class="bg-surface shadow overflow-hidden sm:rounded-md">
@@ -32,8 +8,9 @@
             <li class="border-t border-border-75 first:border-t-0"
                 v-for="course in semester.courses" :key="course.id">
 
-              <router-link :to="{name: 'course:resources', params: {'class': $route.params.class, 'course': course.code, }}"
-                           class="block hover:bg-surface-dark focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
+              <router-link
+                :to="{name: 'course:details', params: {'class': $route.params.class, 'course': course.code, }}"
+                class="block hover:bg-surface-dark focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
                 <div class="flex items-center px-4 py-4 sm:px-6">
                   <div class="flex-shrink-0">
                     <div
@@ -70,15 +47,37 @@
             </li>
           </ul>
         </div>
-      </div>
-    </div>
   </div>
+  </Page>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import Page from '../components/Page.vue';
 
 export default {
+  components: {
+    Page,
+  },
+  data() {
+    return {
+      links: [
+        {
+          id: 'classes',
+          name: 'Classes',
+          route: { name: 'classes' },
+        },
+        {
+          id: 'class:courses',
+          name: this.$route.params.class,
+          route: {
+            name: 'class:courses',
+            params: { class: this.$route.params.class },
+          },
+        },
+      ],
+    };
+  },
   created() {
     this.$store.dispatch('subjects/fetchClassSubjects', this.$route.params.class);
   },

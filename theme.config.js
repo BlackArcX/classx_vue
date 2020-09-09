@@ -13,6 +13,8 @@ const light = new Theme()
     'primary-dark': '#1c313a',
     'primary-light': '#718792',
 
+    accent: '#589d9a',
+
     background: '#eceff1',
     surface: '#fff',
     error: '#e53935',
@@ -35,6 +37,7 @@ const light = new Theme()
 const dark = new Theme()
   .name('dark')
   .colors({
+    accent: '#5fb3b1',
     background: '#263238',
     surface: c('#263238').lighten(3).toHexString(),
 

@@ -3,14 +3,14 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD9ZtT2ATfDPvrIzGf2B6-q81m3u9DXl2c',
-  authDomain: 'comsats-class-resource.firebaseapp.com',
-  databaseURL: 'https://comsats-class-resource.firebaseio.com',
-  projectId: 'comsats-class-resource',
-  storageBucket: 'comsats-class-resource.appspot.com',
-  messagingSenderId: '991585805800',
-  appId: '1:991585805800:web:b1fd985529e5f5a779305d',
-  measurementId: 'G-SR7MYWQEY5',
+  apiKey: 'AIzaSyAY4FiU4-Pp8NWbqM-aQZkcV3fm8yM12fw',
+  authDomain: 'comsats-cr.firebaseapp.com',
+  databaseURL: 'https://comsats-cr.firebaseio.com',
+  projectId: 'comsats-cr',
+  storageBucket: 'comsats-cr.appspot.com',
+  messagingSenderId: '233194843749',
+  appId: '1:233194843749:web:6ba01cca30302d2f',
+  measurementId: 'G-B1G2TE6QMS',
 };
 firebase.initializeApp(firebaseConfig);
 
