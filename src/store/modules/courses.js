@@ -3,13 +3,19 @@ import { db } from '../../firebase';
 export default {
   namespaced: true,
   state: {
-    courses: [],
+    courses: {},
+    resources: {},
+    resourceObservers: {},
   },
   getters: {
     courseByCode(state) {
-      return (cls, code) => state.courses.find(
-        (e) => e.classRef.id === cls && e.code === code,
-      );
+      return (cls, code) => Object.values(state.courses)
+        .find(
+          (e) => e.class.id === cls && e.code === code,
+        );
+    },
+    resourcesByCourseCode(state, getters) {
+      return (cls, code) => state.resources[(getters.courseByCode(cls, code) || {}).id];
     },
   },
   actions: {
@@ -26,12 +32,56 @@ export default {
         ...course.data(),
       });
     },
-    async addResource() {
+    async watchResources({
+      state, commit, getters, dispatch,
+    }, { cls, courseCode }) {
+      let courseId = getters.courseByCode(cls, courseCode);
+      if (!courseId) {
+        await dispatch('fetchCourse', { cls, courseCode });
+        courseId = getters.courseByCode(cls, courseCode).id;
+      }
+
+      if (state.resourceObservers[courseId]) return;
+
+      state.resourceObservers[courseId] = db.collection(`subjects/${courseId}/resources`)
+        .orderBy('date')
+        .onSnapshot((snapshot) => {
+          const resources = [];
+          snapshot.forEach((doc) => {
+            resources.push({ id: doc.id, ...doc.data() });
+          });
+
+          commit('setResources', {
+            courseId,
+            resources,
+          });
+        });
     },
   },
   mutations: {
     setCourse(state, course) {
-      state.courses.push(course);
+      state.courses[course.id] = course;
+    },
+    setResources(state, { courseId, resources }) {
+      const categorizedResources = Object.fromEntries(resources.reduce((acc, el) => {
+        if (el.isHeading) {
+          acc.push([el.name, []]);
+        } else {
+          if (!acc[acc.length - 1]) acc.push(['Resources', []]);
+          acc[acc.length - 1][1].push(el);
+        }
+        return acc;
+      }, []));
+
+      state.resources = {
+        ...state.resources,
+        [courseId]: categorizedResources,
+      };
+    },
+    unwatchResources(state, courseId) {
+      if (state.resourceObservers[courseId] && state.resourceObservers[courseId].unsubscribe) {
+        state.resourceObservers[courseId].unsubscribe();
+      }
     },
   },
 };

@@ -12,7 +12,7 @@
    height="24"
    viewBox="0 0 24 24"
    id="svg4"
-   sodipodi:docname="file.svg"
+   sodipodi:docname="img.svg"
    inkscape:version="0.92.4 5da689c313, 2019-01-14">
   <metadata
      id="metadata10">
@@ -36,7 +36,7 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="828"
+     inkscape:window-width="826"
      inkscape:window-height="480"
      id="namedview6"
      showgrid="false"
@@ -48,7 +48,7 @@
      inkscape:window-maximized="0"
      inkscape:current-layer="svg4" />
   <path
-     d="M13,9V3.5L18.5,9M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6Z"
+     d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"
      id="path2"
-     style="fill:#44486b;fill-opacity:1" />
+     style="fill:#009688;fill-opacity:1" />
 </svg>

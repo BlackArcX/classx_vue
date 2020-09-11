@@ -35,7 +35,7 @@
           <li class="border-t border-border-75">
             <div class="flex items-center px-4 py-4 sm:px-6">
               <div class="flex-shrink-0">
-                <img src="../assets/doc.svg" class="mr-4 w-8">
+                <img src="../../public/img/file-icons/doc.svg" class="mr-4 w-8">
               </div>
               <div class="min-w-0 flex-1 flex flex-col">
                 <div class="text-sm leading-5 font-medium text-on-surface truncate">Lecture 1 Slides</div>
@@ -53,7 +53,7 @@
           <li class="border-t border-border-75">
             <div class="flex items-center px-4 py-4 sm:px-6">
               <div class="flex-shrink-0">
-                <img src="../assets/xls.svg" class="mr-4 w-8">
+                <img src="../../public/img/file-icons/xls.svg" class="mr-4 w-8">
               </div>
               <div class="min-w-0 flex-1 flex flex-col">
                 <div class="text-sm leading-5 font-medium text-on-surface truncate">Lecture 2 Slides</div>
@@ -71,7 +71,7 @@
           <li class="border-t border-border-75">
             <div class="flex items-center px-4 py-4 sm:px-6">
               <div class="flex-shrink-0">
-                <img src="../assets/ppt.svg" class="mr-4 w-8">
+                <img src="../../public/img/file-icons/ppt.svg" class="mr-4 w-8">
               </div>
               <div class="min-w-0 flex-1 flex flex-col">
                 <div class="text-sm leading-5 font-medium text-on-surface truncate">Lecture 3 Slides</div>
@@ -89,7 +89,7 @@
           <li class="border-t border-border-75">
             <div class="flex items-center px-4 py-4 sm:px-6">
               <div class="flex-shrink-0">
-                <img src="../assets/pdf.svg" class="mr-4 w-8">
+                <img src="../../public/img/file-icons/pdf.svg" class="mr-4 w-8">
               </div>
               <div class="min-w-0 flex-1 flex flex-col">
                 <div class="text-sm leading-5 font-medium text-on-surface truncate">Lecture 4 Slides</div>

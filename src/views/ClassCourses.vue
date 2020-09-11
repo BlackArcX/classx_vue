@@ -13,8 +13,8 @@
                 class="block hover:bg-surface-dark focus:outline-none focus:bg-gray-50 transition duration-300 ease-in-out">
                 <div class="flex items-center px-4 py-4 sm:px-6">
                   <div class="flex-shrink-0">
-                    <div
-                      class="h-10 w-10 mr-3 bg-primary rounded-full flex items-center justify-center">
+                    <div :style="{background: generateColor(course.title)}"
+                      class="h-10 w-10 mr-3 rounded-full flex items-center justify-center">
                       <svg class="text-on-primary h-5 w-5" fill="none" stroke-linecap="round"
                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                            stroke="currentColor">
@@ -77,6 +77,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    generateColor(text) {
+      // eslint-disable-next-line no-bitwise
+      let h = Array.from(text).reduce((hash, e) => ((hash << 5) - hash + e.charCodeAt(0)) | 0, 0);
+      h = (h % 72) * 5;
+      return `hsla(${h}, 78%, 52%, 0.8)`;
+    },
   },
   created() {
     this.$store.dispatch('subjects/fetchClassSubjects', this.$route.params.class);
