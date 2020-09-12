@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
+import router from './router';
+import store from './store';
+import Page from './components/Page.vue';
 
 import './registerServiceWorker';
 import './format';
-
-import router from './router';
-import store from './store';
-
-import Page from './components/Page.vue';
+// import './components';
 
 import './styles.css';
 

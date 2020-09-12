@@ -1,7 +1,7 @@
 <template>
   <form :class="[
     { 'label-top': labelTop },
-    { 'tw-form--inline': inline }
+    { 'form--inline': inline }
   ]">
      <div v-if="hasHeader" class="pb-3 border-b border-blue-gray-50">
       <slot name="header">
@@ -22,10 +22,10 @@
 
 <script>
 export default {
-  name: 'tw-form',
+  name: 'x-form',
   provide() {
     return {
-      twForm: this,
+      xForm: this,
     };
   },
   props: {
@@ -89,13 +89,13 @@ export default {
     };
   },
   created() {
-    this.$on('tw.form.addField', (field) => {
+    this.$on('x.form.addField', (field) => {
       if (field) {
         this.fields.push(field);
       }
     });
     /* istanbul ignore next */
-    this.$on('tw.form.removeField', (field) => {
+    this.$on('x.form.removeField', (field) => {
       if (field.prop) {
         this.fields.splice(this.fields.indexOf(field), 1);
       }
@@ -104,7 +104,7 @@ export default {
   methods: {
     resetFields() {
       if (!this.model) {
-        console.warn('[Element Warn][Form]model is required for resetFields to work.');
+        console.warn('[Form]model is required for resetFields to work.');
         return;
       }
       this.fields.forEach((field) => {

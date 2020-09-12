@@ -41,26 +41,26 @@ body {
     to { transform: rotate(360deg); }
 }
 
-.bg-primary,
-.bg-surface,
-.bg-background{
+.bg-primary:not(.transition),
+.bg-surface:not(.transition),
+.bg-background:not(.transition) {
     transition-property: background-color;
     @apply duration-200 ease-in-out;
 }
 
-.text-on-primary,
-.text-on-surface,
-.text-on-background,
-.text-border-dark,
-.text-on-background-75,
-.text-on-surface-60 {
+.text-on-primary:not(.transition),
+.text-on-surface:not(.transition),
+.text-on-background:not(.transition),
+.text-border-dark:not(.transition),
+.text-on-background-75:not(.transition),
+.text-on-surface-60:not(.transition) {
     transition-property: color;
     @apply duration-200 ease-in-out;
 }
 
-.border-border-75,
-.border-border,
-.border-border-dark {
+.border-border-75:not(.transition),
+.border-border:not(.transition),
+.border-border-dark:not(.transition) {
     transition-property: border-color;
     @apply duration-200 ease-in-out;
 }

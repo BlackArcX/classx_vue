@@ -1,26 +1,26 @@
 <template>
   <div class="kMEfp sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-5 first:pt-0" :class="[{
-      'el-form-item--feedback': twForm && twForm.statusIcon,
+      'form-item--feedback': xForm && xForm.statusIcon,
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
       'is-required': isRequired || required,
-      'is-no-asterisk': twForm && twForm.hideRequiredAsterisk
+      'is-no-asterisk': xForm && xForm.hideRequiredAsterisk
     },
-    sizeClass ? 'el-form-item--' + sizeClass : ''
+    sizeClass ? 'form-item--' + sizeClass : ''
   ]">
     <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'">
       <label :for="labelFor" class="block text-sm font-medium leading-5 text-blue-gray-500 sm:mt-px"
              :style="labelStyle" v-if="label || $slots.label" :class="{ 'sm:pt-2 mb-1': !$slots.label }">
-        <slot name="label">{{label + twForm.labelSuffix}}</slot>
+        <slot name="label">{{label + xForm.labelSuffix}}</slot>
         <span v-if="required" class="text-orange-500 pl-1" style="font-family: monospace;">*</span>
       </label>
     </label-wrap>
     <div class="sm:col-span-2" :style="contentStyle">
       <slot></slot>
-      <transition name="el-zoom-in-top">
+      <transition name="zoom-in-top">
         <slot
           v-if="validateState === 'error' && showMessage && form.showMessage"
           name="error"
@@ -28,9 +28,9 @@
           <div
             class="mt-2 text-sm text-red-600"
             :class="{
-              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+              'form-item__error--inline': typeof inlineMessage === 'boolean'
                 ? inlineMessage
-                : (twForm && twForm.inlineMessage || false)
+                : (xForm && xForm.inlineMessage || false)
             }"
           >
             {{validateMessage}}
@@ -42,18 +42,18 @@
 </template>
 <script>
 import AsyncValidator from 'async-validator';
-import { emitter, getPropByPath } from '../utils';
+import { emitter, getPropByPath } from '../../utils';
 import LabelWrap from './LabelWrap.vue';
 
 export default {
-  name: 'tw-form-item',
+  name: 'x-form-item',
   mixins: [emitter],
   provide() {
     return {
-      twFormItem: this,
+      xFormItem: this,
     };
   },
-  inject: ['twForm'],
+  inject: ['xForm'],
   props: {
     label: String,
     labelWidth: String,
@@ -114,7 +114,7 @@ export default {
         if (this.labelWidth === 'auto') {
           ret.marginLeft = this.computedLabelWidth;
         } else if (this.form.labelWidth === 'auto') {
-          ret.marginLeft = this.twForm.autoLabelWidth;
+          ret.marginLeft = this.xForm.autoLabelWidth;
         }
       } else {
         ret.marginLeft = labelWidth;
@@ -124,8 +124,8 @@ export default {
     form() {
       let parent = this.$parent;
       let parentName = parent.$options.name;
-      while (parentName !== 'tw-form') {
-        if (parentName === 'tw-form-item') {
+      while (parentName !== 'x-form') {
+        if (parentName === 'x-form-item') {
           // eslint-disable-next-line vue/no-side-effects-in-computed-properties
           this.isNested = true;
         }
@@ -158,13 +158,13 @@ export default {
       return isRequired;
     },
     formSize() {
-      return this.twForm.size;
+      return this.xForm.size;
     },
-    twFormItemSize() {
+    xFormItemSize() {
       return this.size || this.formSize;
     },
     sizeClass() {
-      return this.twFormItemSize || (this.$ELEMENT || {}).size;
+      return this.xFormItemSize || (this.$ELEMENT || {}).size;
     },
   },
   data() {
@@ -178,7 +178,6 @@ export default {
     };
   },
   methods: {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     validate(trigger, callback = () => {}) {
       this.validateDisabled = false;
       const rules = this.getFilteredRule(trigger);
@@ -202,8 +201,8 @@ export default {
         this.validateState = !errors ? 'success' : 'error';
         this.validateMessage = errors ? errors[0].message : '';
         callback(this.validateMessage, invalidFields);
-        if (this.twForm) {
-          this.twForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
+        if (this.xForm) {
+          this.xForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         }
       });
       return true;
@@ -269,8 +268,8 @@ export default {
     addValidateEvents() {
       const rules = this.getRules();
       if (rules.length || this.required !== undefined) {
-        this.$on('tw.form.blur', this.onFieldBlur);
-        this.$on('tw.form.change', this.onFieldChange);
+        this.$on('x.form.blur', this.onFieldBlur);
+        this.$on('x.form.change', this.onFieldChange);
       }
     },
     removeValidateEvents() {
@@ -279,7 +278,7 @@ export default {
   },
   mounted() {
     if (this.prop) {
-      this.dispatch('tw-form', 'tw.form.addField', [this]);
+      this.dispatch('x-form', 'x.form.addField', [this]);
       let initialValue = this.fieldValue;
       if (Array.isArray(initialValue)) {
         initialValue = [].concat(initialValue);
@@ -291,17 +290,17 @@ export default {
     }
   },
   beforeDestroy() {
-    this.dispatch('tw-form', 'tw.form.removeField', [this]);
+    this.dispatch('x-form', 'x.form.removeField', [this]);
   },
 };
 </script>
 
 <style>
   .is-error input {
-    @apply border-red-300 text-red-900;
+    @apply border-error text-error;
   }
 
   .is-error input:focus {
-    @apply shadow-outline-red border-red-300;
+    @apply shadow-outline border-error;
   }
 </style>

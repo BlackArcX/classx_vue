@@ -4,12 +4,13 @@ export default {
     isAutoWidth: Boolean,
     updateAll: Boolean,
   },
-  inject: ['twForm', 'twFormItem'],
-  render() {
+  inject: ['xForm', 'xFormItem'],
+  // eslint-disable-next-line no-unused-vars
+  render(h) {
     const slots = this.$slots.default;
     if (!slots) return null;
     if (this.isAutoWidth) {
-      const { autoLabelWidth } = this.twForm;
+      const { autoLabelWidth } = this.xForm;
       const style = {};
       if (autoLabelWidth && autoLabelWidth !== 'auto') {
         const marginLeft = parseInt(autoLabelWidth, 10) - this.computedWidth;
@@ -17,7 +18,7 @@ export default {
           style.marginLeft = `${marginLeft}px`;
         }
       }
-      return (<div class="el-form-item__label-wrap" style={style}> { slots } </div>);
+      return (<div class="form-item__label-wrap" style={style}> { slots } </div>);
     }
     return slots[0];
   },
@@ -34,7 +35,7 @@ export default {
         if (action === 'update') {
           this.computedWidth = this.getLabelWidth();
         } else if (action === 'remove') {
-          this.twForm.deregisterLabelWidth(this.computedWidth);
+          this.xForm.deregisterLabelWidth(this.computedWidth);
         }
       }
     },
@@ -42,8 +43,8 @@ export default {
   watch: {
     computedWidth(val, oldVal) {
       if (this.updateAll) {
-        this.twForm.registerLabelWidth(val, oldVal);
-        this.teFormItem.updateComputedLabelWidth(val);
+        this.xForm.registerLabelWidth(val, oldVal);
+        this.xFormItem.updateComputedLabelWidth(val);
       }
     },
   },

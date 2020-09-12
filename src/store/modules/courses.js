@@ -37,6 +37,7 @@ export default {
         ...course.data(),
       });
     },
+
     async watchTasks({
       state, commit, getters, dispatch,
     }, { cls, courseCode }) {
@@ -62,6 +63,7 @@ export default {
           });
         });
     },
+
     async watchResources({
       state, commit, getters, dispatch,
     }, { cls, courseCode }) {
@@ -86,6 +88,14 @@ export default {
             resources,
           });
         });
+    },
+
+    async saveResource(_, { courseId, resourcesId, data }) {
+      if (!resourcesId) {
+        await db.collection(`subjects/${courseId}/resources`).add(data);
+      } else {
+        await db.doc(`subjects/${courseId}/resources/${resourcesId}`).set(data);
+      }
     },
   },
   mutations: {
