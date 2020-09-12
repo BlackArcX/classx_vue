@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import App from './App.vue';
+
 import './registerServiceWorker';
+import './format';
+
 import router from './router';
 import store from './store';
 
@@ -11,11 +14,6 @@ import './styles.css';
 Vue.config.productionTip = false;
 
 Vue.component('Page', Page);
-
-Vue.prototype.formatDate = (date) => {
-  const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: '2-digit' });
-  return dateTimeFormat.format(date);
-};
 
 new Vue({
   router,

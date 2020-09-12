@@ -6,6 +6,8 @@ export default {
     courses: {},
     resources: {},
     resourceObservers: {},
+    tasks: {},
+    tasksObservers: {},
   },
   getters: {
     courseByCode(state) {
@@ -16,6 +18,9 @@ export default {
     },
     resourcesByCourseCode(state, getters) {
       return (cls, code) => state.resources[(getters.courseByCode(cls, code) || {}).id];
+    },
+    tasksByCourseCode(state, getters) {
+      return (cls, code) => state.tasks[(getters.courseByCode(cls, code) || {}).id];
     },
   },
   actions: {
@@ -32,10 +37,35 @@ export default {
         ...course.data(),
       });
     },
+    async watchTasks({
+      state, commit, getters, dispatch,
+    }, { cls, courseCode }) {
+      let courseId = (getters.courseByCode(cls, courseCode) || {}).id;
+      if (!courseId) {
+        await dispatch('fetchCourse', { cls, courseCode });
+        courseId = getters.courseByCode(cls, courseCode).id;
+      }
+
+      if (state.tasksObservers[courseId]) return;
+
+      state.tasksObservers[courseId] = db.collection(`subjects/${courseId}/tasks`)
+        .orderBy('dueDate')
+        .onSnapshot((snapshot) => {
+          const tasks = [];
+          snapshot.forEach((doc) => {
+            tasks.push({ id: doc.id, ...doc.data() });
+          });
+
+          commit('setTasks', {
+            courseId,
+            tasks,
+          });
+        });
+    },
     async watchResources({
       state, commit, getters, dispatch,
     }, { cls, courseCode }) {
-      let courseId = getters.courseByCode(cls, courseCode);
+      let courseId = (getters.courseByCode(cls, courseCode) || {}).id;
       if (!courseId) {
         await dispatch('fetchCourse', { cls, courseCode });
         courseId = getters.courseByCode(cls, courseCode).id;
@@ -78,9 +108,26 @@ export default {
         [courseId]: categorizedResources,
       };
     },
+    setTasks(state, { courseId, tasks }) {
+      state.tasks = {
+        ...state.tasks,
+        [courseId]: tasks,
+      };
+    },
     unwatchResources(state, courseId) {
-      if (state.resourceObservers[courseId] && state.resourceObservers[courseId].unsubscribe) {
-        state.resourceObservers[courseId].unsubscribe();
+      const observer = state.resourceObservers[courseId];
+      if (observer && observer.unsubscribe) {
+        observer.unsubscribe();
+
+        delete state.resourceObservers[courseId];
+      }
+    },
+    unwatchTasks(state, courseId) {
+      const observer = state.tasksObservers[courseId];
+      if (observer && observer.unsubscribe) {
+        observer.unsubscribe();
+
+        delete state.tasksObservers[courseId];
       }
     },
   },

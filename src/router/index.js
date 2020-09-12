@@ -43,7 +43,7 @@ const routes = [
       {
         path: 'tasks',
         name: 'course:tasks',
-        component: () => import(/* webpackChunkName: "course" */ '@/views/CourseResources.vue'),
+        component: () => import(/* webpackChunkName: "course" */ '@/views/CourseTasks.vue'),
         meta: { title: 'Tasks' },
       },
       {

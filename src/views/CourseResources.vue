@@ -16,7 +16,7 @@
                     {{ resource.name }}
                   </div>
                   <div class="mt-1 text-sm leading-5 text-on-surface-60 truncate">
-                    {{ formatDate(resource.date.toDate()) }}
+                    {{ formatDistance(resource.date.toDate()) }} ago
                   </div>
                 </div>
                 <div class="flex">
