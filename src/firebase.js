@@ -12,8 +12,10 @@ const firebaseConfig = {
   appId: '1:233194843749:web:6ba01cca30302d2f',
   measurementId: 'G-B1G2TE6QMS',
 };
+
 firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore();
+db.enablePersistence({ synchronizeTabs: true });
 
 export const classesCollection = db.collection('classes');

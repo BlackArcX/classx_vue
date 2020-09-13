@@ -5,9 +5,8 @@ const { transparentize } = require('polished');
 
 module.exports = {
   purge: [
-    './src/**/*.html',
-    './src/**/*.ts',
-    './src/**/*.tsx',
+    './src/**/*.vue',
+    './src/**/*.css',
   ],
   theme: {
     extend: {

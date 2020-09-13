@@ -23,7 +23,7 @@ const light = new Theme()
 
     'on-primary': '#fff',
     'on-background': '#212121',
-    'on-surface': '#455a64',
+    'on-surface': '##263238',
     'on-error': '#fff',
 
     border: '#cfd8dc',
