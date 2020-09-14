@@ -12,7 +12,7 @@
     <label-wrap
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'">
-      <label :for="labelFor" class="block text-sm font-medium leading-5 text-blue-gray-500 sm:mt-px"
+      <label :for="labelFor" class="block text-sm font-medium leading-5 text-on-surface-75 sm:mt-px"
              :style="labelStyle" v-if="label || $slots.label" :class="{ 'sm:pt-2 mb-1': !$slots.label }">
         <slot name="label">{{label + xForm.labelSuffix}}</slot>
         <span v-if="required" class="text-orange-500 pl-1" style="font-family: monospace;">*</span>
@@ -26,7 +26,7 @@
           name="error"
           :error="validateMessage">
           <div
-            class="mt-2 text-sm text-red-600"
+            class="mt-2 text-sm text-error-fg"
             :class="{
               'form-item__error--inline': typeof inlineMessage === 'boolean'
                 ? inlineMessage
@@ -297,10 +297,10 @@ export default {
 
 <style>
   .is-error input {
-    @apply border-error text-error;
+    @apply border-error-fg;
   }
 
   .is-error input:focus {
-    @apply shadow-outline border-error;
+    @apply shadow-outline border-error-fg;
   }
 </style>

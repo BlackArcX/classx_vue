@@ -21,6 +21,8 @@ const light = new Theme()
     success: '#43a047',
     info: '#1e88e5',
 
+    'error-fg': '#f4511e',
+
     'on-primary': '#fff',
     'on-background': '#212121',
     'on-surface': '##263238',
@@ -44,6 +46,8 @@ const dark = new Theme()
     'on-background': '#fff',
     'on-surface': '#fff',
     border: c('#455a64').darken(3).toHexString(),
+
+    'error-fg': '#ff7575',
   })
   .colorVariant('dark', c('#455a64').lighten(20).toString('hex6'), 'border')
   .colorVariant('dark', c('#263238').lighten(5).toHexString(), 'surface');

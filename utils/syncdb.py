@@ -1,3 +1,5 @@
+import sys
+
 from datetime import datetime
 from firebase_admin import firestore
 from google.cloud.exceptions import NotFound
@@ -73,7 +75,9 @@ def load_collections(obj: dict, base_doc, db):
 
 def _dump_collection(collection, depth=0):
     data = {}
+
     for doc in collection:
+        print(f'fetching {doc._reference.path}', file=sys.stderr)
         if type(doc) == CollectionReference:
             doc = doc.get()
 

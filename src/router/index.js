@@ -71,6 +71,11 @@ const routes = [
     },
   },
   {
+    path: '/get-started',
+    name: 'auth-step1',
+    component: () => import('@/views/auth/step1.vue'),
+  },
+  {
     path: '/',
     name: 'home',
     redirect: { name: 'classes' },

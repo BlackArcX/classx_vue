@@ -3,7 +3,7 @@
     { 'label-top': labelTop },
     { 'form--inline': inline }
   ]">
-     <div v-if="hasHeader" class="pb-3 border-b border-blue-gray-50">
+     <div v-if="hasHeader" class="pb-3 border-b border-border">
       <slot name="header">
         <h3 v-if="$slots.title || title" class="text-lg leading-6 font-medium text-blue-gray-900">
           <slot name="title">{{title}}</slot>

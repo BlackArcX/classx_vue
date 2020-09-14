@@ -35,7 +35,7 @@ export default {
           'focus:border-blue-gray-900 focus:shadow-outline active:bg-primary-light',
         ],
         secondary: [
-          'border-transparent text-on-surface bg-background focus:outline-none',
+          'border-transparent text-on-surface-75 bg-background focus:outline-none',
           'focus:border-border-dark focus:shadow-outline active:bg-blue-gray-200',
         ],
         white: [

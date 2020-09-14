@@ -15,7 +15,7 @@
   >
     <template v-if="type !== 'textarea'">
       <div v-if="$slots.prepend"
-           class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-blue-gray-100 bg-blue-gray-50 text-blue-gray-500 sm:text-sm">
+           class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-border bg-surface text-blue-gray-500 sm:text-sm">
         <slot name="prepend"></slot>
       </div>
       <div class="relative inline-block w-full">
@@ -155,8 +155,8 @@ export default {
       return [
         this.$slots['leading-icon'] ? 'leading-icon' : '',
         this.$slots['trailing-icon'] ? 'trailing-icon' : '',
-        'block w-full border-blue-gray-100 focus:border-blue-gray-300 sm:text-sm sm:leading-5 text-blue-gray-800',
-        'focus:shadow-outline-blue-gray font-normal text-sm form-input transition duration-100',
+        'block w-full border-border focus:border-blue-gray-300 sm:text-sm sm:leading-5 text-on-surface-75',
+        'focus:shadow-outline-blue-gray text-sm form-input transition duration-100 bg-surface',
         this.inputClass,
       ];
     },

@@ -81,7 +81,7 @@ export default {
   methods: {
     generateColor(text) {
       // eslint-disable-next-line no-bitwise
-      let h = Array.from(text).reduce((hash, e) => ((hash << 5) - hash + e.charCodeAt(0)) | 0, 0);
+      let h = Array.from(text || '').reduce((hash, e) => ((hash << 5) - hash + e.charCodeAt(0)) | 0, 0);
       h = (h % 72) * 5;
       return `hsla(${h}, 78%, 52%, 0.8)`;
     },

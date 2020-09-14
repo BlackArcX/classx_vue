@@ -18,6 +18,7 @@ module.exports = {
   variants: {
     borderWidth: ['responsive', 'first', 'hover', 'focus'],
     display: ['responsive', 'last'],
+    padding: ['responsive', 'first'],
   },
   plugins: [
     require('@tailwindcss/custom-forms'),
