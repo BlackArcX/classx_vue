@@ -74,7 +74,7 @@ export default {
       },
       rules: {
         rollNumber: [
-          { required: true, message: 'Email is required', trigger: 'blur' },
+          { required: true, message: 'Roll number is required', trigger: 'blur' },
           {
             trigger: 'blur',
             validator(rule, value, callback) {

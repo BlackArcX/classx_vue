@@ -27,10 +27,10 @@
 <script>
 export default {
   data() {
-    const theme = localStorage.theme || (
+    const theme = localStorage.theme || ((
       window.matchMedia
       && window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) ? 'dark' : 'auto';
+    ) ? 'dark' : 'auto');
 
     document.body.classList.remove(theme !== 'dark' ? 'dark' : 'light');
     document.body.classList.add(theme);
