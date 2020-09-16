@@ -92,10 +92,11 @@
 </template>
 
 <script>
-import { calcTextareaHeight, emitter } from '../utils';
+import { emitter } from '../../utils';
+import calcTextareaHeight from '../../utils/calcTextareaHeight';
 
 export default {
-  name: 'x-input',
+  name: 'xInput',
   mixins: [emitter],
   inheritAttrs: false,
   inject: {

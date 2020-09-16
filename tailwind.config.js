@@ -19,6 +19,7 @@ module.exports = {
     borderWidth: ['responsive', 'first', 'hover', 'focus'],
     display: ['responsive', 'last'],
     padding: ['responsive', 'first'],
+    margin: ['responsive', 'first'],
   },
   plugins: [
     require('@tailwindcss/custom-forms'),
