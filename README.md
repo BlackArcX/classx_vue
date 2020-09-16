@@ -1,24 +1,27 @@
-# clase
+# ClassX Vue
 
-## Project setup
-```
-npm install
-```
+VueJs based frontend for ClassX.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Useful Links
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* Website: https://classresources.web.app/
+* Project issue: https://github.com/BlackArcX/classx_vue/issues
+* Contribution Guidelines: https://github.com/BlackArcX/classx_vue/blob/master/CONTRIBUTING.md
+* Contributor Code of Conduct: https://github.com/BlackArcX/classx_vue/blob/master/CODE_OF_CONDUCT.md
+* License: https://github.com/BlackArcX/classx_vue/blob/master/LICENSE
 
-### Lints and fixes files
-```
-npm run lint
-```
+## For developers
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```sh
+# install project dependencies
+$ npm install
+
+# run development server
+$ npm run serve
+
+# build for production
+$ npm run build
+
+# lint and fix issues
+$ npm run lint
+```
