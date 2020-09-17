@@ -47,7 +47,7 @@
                   {{isSignIn ? 'Don\'t have account?' : 'Already have account?'}}
                 </router-link>
 
-                <router-link :to="{ name: 'auth-forget-pass' }"v-if="isSignIn"
+                <router-link :to="{ name: 'auth-forget-pass' }" v-if="isSignIn"
                              class="hover:underline cursor-pointer">
                   Forget Password?
                 </router-link>
