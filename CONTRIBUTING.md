@@ -47,5 +47,15 @@ The redesign can be in nay of the following ways, but limited to them only:
 
 ## Pull Request Guidelines
 
-Please create an issue before creating a pull request.
+**We actively welcome your pull requests. But, disscussing the problem in an issue before creating a PR is recommended.**
+
+1. Fork the repo and create your branch from `master`.
+2. Name your branch something that descripts the work your are doing.
+3. If you've added code that should be tested, add tests.
+4. If you make visual changes, screenshots will be recomended.
+5. Make sure to address any lint warnings.
+6. If you make existing code better please let use known in PR description.
+7. A PR description and title are required.
+8. Link your PR to an issue. Unlinked PRs are also welcomed but it would be better to annouce your intentions before working on something.
+
 
