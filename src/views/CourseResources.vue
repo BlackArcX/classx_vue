@@ -3,7 +3,7 @@
     <template v-for="category in Object.entries(resources)">
       <h1 :key="category[0]" class="text-md leading-6 font-medium text-on-surface py-3 mt-4">{{category[0]}}</h1>
 
-      <div class="bg-surface shadow overflow-hidden sm:rounded-md">
+      <div :key="'d-' + category[0]" class="bg-surface shadow overflow-hidden sm:rounded-md">
         <ul>
           <template v-for="resource in category[1]">
             <li :key="resource.id" class="border-t border-border-75 first:border-t-0">
