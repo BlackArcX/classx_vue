@@ -32,6 +32,7 @@
                @blur="handleBlur"
                @change="handleChange"
                :aria-label="label"
+               :autocomplete="autocomplete"
         >
         <span class="absolute inset-y-0 left-0 pl-3 flex items-center" v-if="$slots.prefix">
             <slot name="prefix"></slot>
@@ -65,7 +66,7 @@
         </span>
       </span>
       </div>
-      <div v-if="$slots.append" class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-blue-gray-100 bg-blue-gray-50 text-blue-gray-500 sm:text-sm">
+      <div v-if="$slots.append" style="margin-left: -1px;" class="inline-flex items-center">
         <slot name="append"></slot>
       </div>
     </template>
@@ -150,6 +151,10 @@ export default {
     },
     tabindex: String,
     inputClass: String,
+    autocomplete: {
+      type: String,
+      default: 'on',
+    },
   },
   computed: {
     inputClasses() {

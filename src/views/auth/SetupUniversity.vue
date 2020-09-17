@@ -30,17 +30,12 @@
           </x-form-item>
 
           <x-form-item class="mt-4">
-            <div class="flex space-x-4">
-              <x-button variant="secondary" wide>
-                Skip
-              </x-button>
-              <x-button wide>
-                Next
-                <svg class="w-4 h-4 text-on-primary relative" style="right: -.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-              </x-button>
-            </div>
+            <x-button wide>
+              Next
+              <svg class="w-4 h-4 text-on-primary relative" style="right: -.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </x-button>
           </x-form-item>
         </x-form>
       </div>
