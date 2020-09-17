@@ -13,14 +13,15 @@ import Header from './components/Header.vue';
 export default {
   components: { Header },
   watch: {
-    $route (to, from) {
-      if (typeof to.meta.title == "string")
+    $route(to) {
+      if (typeof to.meta.title === 'string') {
         document.title = `${to.meta.title} - ClassX`;
-      else if (typeof to.meta.title == "function")
+      } else if (typeof to.meta.title === 'function') {
         document.title = `${to.meta.title(to)} - ClassX`;
-      else
-        document.title = `ClassX`;
-    }
+      } else {
+        document.title = 'ClassX';
+      }
+    },
   },
 };
 </script>

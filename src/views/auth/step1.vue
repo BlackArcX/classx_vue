@@ -50,10 +50,10 @@
 
 <script>
 import { mask } from 'vue-the-mask';
-import Form from '../../components/form/Form.vue';
-import FormItem from '../../components/form/FormItem.vue';
-import Input from '../../components/input.vue';
-import Button from '../../components/Button.vue';
+import Form from '../../components/elements/Form.vue';
+import FormItem from '../../components/elements/FormItem.vue';
+import Input from '../../components/elements/Input.vue';
+import Button from '../../components/elements/Button.vue';
 
 export default {
   components: {
