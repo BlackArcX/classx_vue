@@ -20,7 +20,7 @@
             <div class="mb-4">
               <p class="text-sm text-error-fg mb-2" v-if="apiError">{{apiError}}</p>
             </div>
-            <x-button :loading="loading" @click="submit" wide>
+            <x-button :loading="loading" wide>
               {{ loading ? 'Sending...' : 'Send reset password email' }}
             </x-button>
           </x-form-item>

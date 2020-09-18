@@ -8,11 +8,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Header from './components/Header.vue';
+import { auth } from './firebase';
 
 export default {
   components: { Header },
+  created() {
+    auth.onAuthStateChanged(() => {
+      this.$store.dispatch('profile/fetchProfile');
+    });
+  },
+  computed: {
+    ...mapState('profile', { isProfileAvailable: 'isAvailable' }),
+  },
   watch: {
+    isProfileAvailable() {
+      if (!this.isProfileAvailable && this.$route.path.indexOf('auth') === -1) {
+        this.$router.push({ name: 'setup-university', query: { next: this.$route.path } });
+      }
+    },
     $route(to) {
       if (typeof to.meta.title === 'string') {
         document.title = `${to.meta.title} - ClassX`;

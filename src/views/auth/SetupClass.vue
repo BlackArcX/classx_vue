@@ -11,34 +11,30 @@
       </div>
 
       <div class="px-4 py-5 sm:p-6">
-        <x-form :model="formData" ref="form">
+        <x-form :model="formData" :rules="rules" ref="form" @submit.prevent.native="submit">
           <x-form-item label="Your Name" prop="name">
-            <x-input v-model="formData.name"></x-input>
+            <x-input v-model="formData.name" placeholder="i.e., Ali"></x-input>
           </x-form-item>
 
           <x-form-item label="Your Class" prop="klass">
             <div class="flex flex-col space-y-4 mt-4">
-              <x-radio label="fa18-bcs-a" v-model="formData.klass">
-                FA18-BCS-A
-                <span slot="description">Sharaiz Khan</span>
-              </x-radio>
-              <x-radio label="fa18-bcs-b" v-model="formData.klass">
-                FA18-BCS-B
-                <span slot="description">Sharaiz Khan</span>
-              </x-radio>
-              <x-radio label="fa18-bcs-c" v-model="formData.klass">
-                FA18-BCS-C
-                <span slot="description">Sharaiz Khan</span>
-              </x-radio>
-              <x-radio label="fa18-bcs-d" v-model="formData.klass">
-                FA18-BCS-D
-                <span slot="description">Sharaiz Khan</span>
-              </x-radio>
+              <div v-if="!classes" class="text-sm text-on-surface-75 text-center">
+                Loading related classes...
+              </div>
+              <template v-else>
+                <x-radio v-for="cls in classes" :key="cls.id" :label="cls.id" v-model="formData.klass">
+                  {{cls.name}}
+                  <span slot="description">{{cls.CR}}</span>
+                </x-radio>
+              </template>
             </div>
           </x-form-item>
 
           <x-form-item>
-            <x-button wide>Get started</x-button>
+            <div class="flex space-x-4">
+              <x-button type="button" @click="back" wide variant="secondary">Back</x-button>
+              <x-button wide>Get started</x-button>
+            </div>
           </x-form-item>
         </x-form>
       </div>
@@ -47,6 +43,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Form from '../../components/elements/Form.vue';
 import FormItem from '../../components/elements/FormItem.vue';
 import Input from '../../components/elements/Input.vue';
@@ -61,13 +58,63 @@ export default {
     'x-button': Button,
     'x-radio': Radio,
   },
+  created() {
+    this.$store.dispatch('profile/loadRelatedClasses');
+  },
+  computed: {
+    ...mapState('profile', { classes: 'relatedClasses' }),
+  },
+  watch: {
+    classes() {
+      if (this.classes) {
+        this.formData.klass = this.classes[0].id;
+      }
+    },
+  },
   data() {
     return {
       formData: {
         name: '',
         klass: '',
       },
+      rules: {
+        name: [
+          { required: true, message: 'Name is required', trigger: 'blur' },
+        ],
+        klass: [
+          { required: true, message: 'Class is required', trigger: 'blur' },
+        ],
+      },
     };
+  },
+  methods: {
+    async submit() {
+      let validated = false;
+      try {
+        validated = await this.$refs.form.validate();
+      } catch (e) {
+        validated = false;
+      }
+      if (!validated) return;
+
+      this.$store.commit('profile/updateLocalProfile', {
+        name: this.formData.name,
+        classPath: `/classes/${this.formData.klass}`,
+        className: this.classes.find((e) => e.id === this.formData.klass).name,
+      });
+
+      await this.$store.dispatch('profile/saveLocalProfile');
+
+      if (this.$route.query.next) {
+        await this.$router.push(this.$route.query.next);
+      } else {
+        await this.$router.push({ name: 'home' });
+      }
+    },
+    back() {
+      this.$store.commit('profile/clearLocalProfile', {});
+      this.$router.push({ name: 'setup-university', query: this.$route.query });
+    },
   },
 };
 </script>

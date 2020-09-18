@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Home from '../views/Home.vue';
+import Home from '../views/Home.vue';
 
 import authRoutes from './auth';
 
@@ -75,7 +75,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: { name: 'classes' },
+    component: Home,
   },
   ...authRoutes,
 ];

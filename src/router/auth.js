@@ -1,3 +1,5 @@
+import store from '../store';
+
 export default [
   {
     path: '/auth/login',
@@ -24,10 +26,28 @@ export default [
     path: '/auth/setup-university',
     name: 'setup-university',
     component: () => import('@/views/auth/SetupUniversity.vue'),
+    beforeEnter: (to, from, next) => {
+      const { rollNumber, university } = store.state.profile.localProfile;
+
+      if (rollNumber && university) {
+        next({ name: 'setup-class', query: to.query });
+      } else {
+        next();
+      }
+    },
   },
   {
     path: '/auth/setup-class',
     name: 'setup-class',
     component: () => import('@/views/auth/SetupClass.vue'),
+    beforeEnter: (to, from, next) => {
+      const { rollNumber, university } = store.state.profile.localProfile;
+
+      if (!rollNumber && !university) {
+        next({ name: 'setup-university', query: to.query });
+      } else {
+        next();
+      }
+    },
   },
 ];

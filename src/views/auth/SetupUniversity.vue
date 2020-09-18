@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="px-4 py-5 sm:p-6">
-        <x-form :model="formData" :rules="rules" @submit.prevent.native="submit" ref="form">
+        <x-form :model="formData" :rules="rules" @submit.native.prevent="submit" ref="form">
           <x-form-item label="Your University">
             <button type="button" class="cursor-default relative w-full rounded-md border border-border bg-surface pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5">
               <div class="flex items-center space-x-3">
@@ -83,6 +83,7 @@ export default {
               } else if (programs.split(',').indexOf(match[3].toUpperCase()) === -1) {
                 callback(new Error(`Invalid roll number. (Program: ${match[3].toUpperCase()})`));
               }
+              callback();
             },
           },
         ],
@@ -97,8 +98,18 @@ export default {
       } catch (e) {
         validated = false;
       }
+
       if (!validated) return;
-      console.log('validated');
+
+      this.$store.commit('profile/updateLocalProfile', {
+        rollNumber: this.formData.rollNumber,
+        uniPath: '/universities/COMSATS@LHR',
+        uniName: 'COMSATS Lahore',
+      });
+
+      setTimeout(() => {
+        this.$router.push({ name: 'setup-class', query: this.$route.query });
+      }, 100);
     },
   },
 };

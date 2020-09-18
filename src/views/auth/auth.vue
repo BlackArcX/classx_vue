@@ -127,8 +127,12 @@ export default {
     async signInWithGoogle() {
       this.googleBtnLoading = true;
       try {
-        const result = await auth.signInWithPopup(googleAuthProvider);
-        console.log(result);
+        await auth.signInWithPopup(googleAuthProvider);
+        if (this.$route.query.next) {
+          await this.$router.push(this.$route.query.next);
+        } else {
+          await this.$router.push({ name: 'home' });
+        }
       } catch (e) {
         let error = e;
         if (typeof e.toJSON === 'function') {
@@ -163,14 +167,17 @@ export default {
       this.emailBtnLoading = true;
 
       try {
-        let user;
         if (this.isSignIn) {
-          user = await auth.signInWithEmailAndPassword(this.formData.email, this.formData.password);
+          await auth.signInWithEmailAndPassword(this.formData.email, this.formData.password);
         } else {
-          user = await auth.createUserWithEmailAndPassword(this.formData.email, this.formData.password);
+          await auth.createUserWithEmailAndPassword(this.formData.email, this.formData.password);
         }
-        debugger;
-        console.log(user);
+
+        if (this.$route.query.next) {
+          await this.$router.push(this.$route.query.next);
+        } else {
+          await this.$router.push({ name: 'home' });
+        }
       } catch (e) {
         let error = e;
         if (typeof e.toJSON === 'function') {
