@@ -8,6 +8,12 @@ export default {
     profileObserver: null,
     localProfile: JSON.parse(localStorage.getItem('localProfile') || '{}'),
     relatedClasses: null,
+    isLoading: true,
+  },
+  getters: {
+    isAuthenticated(state) {
+      return state.profile;
+    },
   },
   actions: {
     async fetchProfile({ commit }) {
@@ -16,6 +22,7 @@ export default {
       const observer = db.doc(`/users/${auth.currentUser.uid}`)
         .onSnapshot((document) => {
           commit('setProfileAvailability', document.exists);
+          commit('setLoading', false);
 
           if (document.exists) {
             commit('setProfileData', document.data());
@@ -92,6 +99,9 @@ export default {
     },
     setProfileObserver(state, observer) {
       state.profileObserver = observer;
+    },
+    setLoading(state, loading) {
+      state.isLoading = loading;
     },
   },
 };
