@@ -73,7 +73,7 @@ export default {
         const path = routes.slice(0, i).join('/');
         let route = this.$router.match(path);
 
-        // todo: get exact routed redirected from
+        // todo: get exact route redirected from
         if (route.redirectedFrom) {
           route = {
             ...route,
@@ -106,11 +106,12 @@ export default {
         }
 
         if (route.meta.title && !route.meta.hidden) {
-          if (typeof route.meta.title === 'function') {
-            route.meta.title = route.meta.title(route);
+          let { title } = route.meta;
+          if (typeof title === 'function') {
+            title = title(route);
           }
           breadcrumbItems.push({
-            name: route.meta?.title,
+            name: title,
             path,
           });
         }
