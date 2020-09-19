@@ -19,7 +19,7 @@ export default {
     variant: {
       type: String,
       default: 'primary',
-      validator: (val) => ['primary', 'secondary', 'white', 'dark', 'danger', 'outline'].indexOf(val) > -1,
+      validator: (val) => ['primary', 'secondary', 'white', 'dark', 'danger', 'outline', 'outline-dark'].indexOf(val) > -1,
     },
     wide: Boolean,
   },
@@ -51,6 +51,10 @@ export default {
           'focus:border-red-300 focus:shadow-outline-red active:bg-red-200',
         ],
         outline: [
+          'border border-border text-on-surface-75 bg-transparent focus:outline-none',
+          'focus:shadow-outline',
+        ],
+        'outline-dark': [
           'border-2 border-border-dark text-on-surface-75 bg-transparent focus:outline-none',
           'focus:shadow-outline',
         ],

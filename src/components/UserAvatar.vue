@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isLoading">
-    <x-button v-if="!isAuthenticated" variant="outline"
+    <x-button v-if="!isAuthenticated" variant="outline-dark"
               @click="$router.push({ name: 'auth-login', query: { next: $route.path } })">
       Sign in
     </x-button>
