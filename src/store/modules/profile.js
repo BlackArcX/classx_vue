@@ -8,7 +8,7 @@ export default {
     profileObserver: null,
     localProfile: JSON.parse(localStorage.getItem('localProfile') || '{}'),
     relatedClasses: null,
-    isLoading: false,
+    isLoading: true,
   },
   getters: {
     isAuthenticated(state) {
@@ -17,9 +17,11 @@ export default {
   },
   actions: {
     async fetchProfile({ commit }) {
-      if (!auth.currentUser) return;
+      if (!auth.currentUser) {
+        commit('setLoading', false);
+        return;
+      }
 
-      commit('setLoading', true);
       const observer = db.doc(`/users/${auth.currentUser.uid}`)
         .onSnapshot((document) => {
           commit('setProfileAvailability', document.exists);

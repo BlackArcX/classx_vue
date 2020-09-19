@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import Header from './components/Header.vue';
 import { auth } from './firebase';
 
@@ -21,10 +21,11 @@ export default {
   },
   computed: {
     ...mapState('profile', { isProfileAvailable: 'isAvailable' }),
+    ...mapGetters('profile', ['isAuthenticated']),
   },
   watch: {
     isProfileAvailable() {
-      if (!this.isProfileAvailable && this.$route.path.indexOf('auth') === -1) {
+      if (!this.isProfileAvailable && this.$route.path.indexOf('auth') === -1 && this.isAuthenticated) {
         this.$router.push({ name: 'setup-university', query: { next: this.$route.path } });
       }
     },
