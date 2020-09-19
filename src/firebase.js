@@ -2,7 +2,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyAY4FiU4-Pp8NWbqM-aQZkcV3fm8yM12fw',
   authDomain: 'comsats-cr.firebaseapp.com',
   databaseURL: 'https://comsats-cr.firebaseio.com',

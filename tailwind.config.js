@@ -20,6 +20,7 @@ module.exports = {
     display: ['responsive', 'last'],
     padding: ['responsive', 'first'],
     margin: ['responsive', 'first'],
+    zIndex: ['responsive', 'focus'],
   },
   plugins: [
     require('@tailwindcss/custom-forms'),

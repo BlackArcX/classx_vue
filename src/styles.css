@@ -54,14 +54,16 @@ body, button, input {
 .text-border-dark:not(.transition),
 .text-on-background-75:not(.transition),
 .text-on-surface-60:not(.transition),
-.text-on-surface-75:not(.transition){
+.text-on-surface-75:not(.transition),
+.text-on-surface-80:not(.transition) {
     transition-property: color;
     @apply duration-200 ease-in-out;
 }
 
 .border-border-75:not(.transition),
 .border-border:not(.transition),
-.border-border-dark:not(.transition) {
+.border-border-dark:not(.transition),
+.border-border-light:not(.transition){
     transition-property: border-color;
     @apply duration-200 ease-in-out;
 }
