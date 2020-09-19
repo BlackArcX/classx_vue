@@ -29,8 +29,9 @@
               </div>
             </template>
           </div>
-          <div>
-            <ThemeToggle/>
+          <div class="flex space-x-4 items-center">
+            <ThemeToggle />
+            <UserAvatar />
           </div>
         </div>
       </div>
@@ -40,9 +41,11 @@
 
 <script>
 import ThemeToggle from './ThemeToggle.vue';
+import UserAvatar from './UserAvatar.vue';
 
 export default {
   components: {
+    UserAvatar,
     ThemeToggle,
   },
   created() {

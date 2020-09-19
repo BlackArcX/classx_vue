@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Home from '../views/Home.vue';
+import Home from '../views/Home.vue';
+
+import authRoutes from './auth';
 
 Vue.use(VueRouter);
 
@@ -71,15 +73,11 @@ const routes = [
     },
   },
   {
-    path: '/get-started',
-    name: 'auth-step1',
-    component: () => import('@/views/auth/step1.vue'),
-  },
-  {
     path: '/',
     name: 'home',
-    redirect: { name: 'classes' },
+    component: Home,
   },
+  ...authRoutes,
 ];
 
 const router = new VueRouter({

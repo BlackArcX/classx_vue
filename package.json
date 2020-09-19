@@ -15,6 +15,7 @@
     "gapi-client": "0.0.3",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
+    "vue-clickaway": "^2.2.2",
     "vue-router": "^3.2.0",
     "vue-the-mask": "^0.11.1",
     "vuex": "^3.4.0"
@@ -39,7 +40,6 @@
     "tinycolor2": "^1.4.1",
     "vue-cli-plugin-tailwind": "^1.4.1",
     "vue-cli-plugin-webpack-bundle-analyzer": "~2.0.0",
-    "vue-clickaway": "^2.2.2",
     "vue-template-compiler": "^2.6.11"
   }
 }

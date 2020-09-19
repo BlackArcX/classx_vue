@@ -33,6 +33,7 @@ const light = new Theme()
   .opacityVariant('80', 0.80)
   .opacityVariant('75', 0.75)
   .opacityVariant('60', 0.60)
+  .opacityVariant('disabled', 0.35, ['on-primary', 'on-background', 'on-surface', '0n-error'])
   .colorVariant('dark', c('#cfd8dc').darken().toHexString(), 'border')
   .colorVariant('dark', c('#ffffff').darken().toHexString(), 'surface');
 

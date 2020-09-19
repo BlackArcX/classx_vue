@@ -19,3 +19,6 @@ export const db = firebase.firestore();
 db.enablePersistence({ synchronizeTabs: true });
 
 export const classesCollection = db.collection('classes');
+
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+export const auth = firebase.auth();

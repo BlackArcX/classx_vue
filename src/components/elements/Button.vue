@@ -19,36 +19,40 @@ export default {
     variant: {
       type: String,
       default: 'primary',
-      validator: (val) => ['primary', 'secondary', 'white', 'dark', 'danger'].indexOf(val) > -1,
+      validator: (val) => ['primary', 'secondary', 'white', 'dark', 'danger', 'outline'].indexOf(val) > -1,
     },
     wide: Boolean,
   },
   data() {
     return {
       defaultClassList: [
-        'transition', 'ease-in-out', 'duration-150', 'border', 'font-medium', 'inline-flex', 'items-center',
+        'transition', 'ease-in-out', 'duration-150', 'font-medium', 'inline-flex', 'items-center',
         'focus:z-10',
       ],
       variantClassList: {
         primary: [
-          'border-transparent text-white bg-primary hover:bg-primary focus:outline-none',
+          'border border-transparent text-white bg-primary hover:bg-primary focus:outline-none',
           'focus:border-blue-gray-900 focus:shadow-outline active:bg-primary-light',
         ],
         secondary: [
-          'border-transparent text-on-surface-75 bg-background focus:outline-none',
+          'border border-transparent text-on-surface-75 bg-background focus:outline-none',
           'focus:border-border-dark focus:shadow-outline active:bg-blue-gray-200',
         ],
         white: [
-          'border-gray-300 text-gray-700 bg-white hover:text-gray-600 focus:outline-none',
+          'border border-border text-on-primary bg-white hover:text-gray-600 focus:outline-none',
           'focus:border-blue-300 focus:shadow-outline active:text-gray-800 active:bg-gray-50',
         ],
         dark: [
-          'border-transparent text-white bg-gray-600 hover:bg-gray-500 focus:outline-none',
+          'border border-transparent text-white bg-gray-600 hover:bg-gray-500 focus:outline-none',
           'focus:shadow-outline focus:border-gray-700 active:bg-gray-700',
         ],
         danger: [
-          'border-transparent text-red-700 bg-red-100 hover:bg-red-50 focus:outline-none',
+          'border border-transparent text-red-700 bg-red-100 hover:bg-red-50 focus:outline-none',
           'focus:border-red-300 focus:shadow-outline-red active:bg-red-200',
+        ],
+        outline: [
+          'border-2 border-border-dark text-on-surface-75 bg-transparent focus:outline-none',
+          'focus:shadow-outline',
         ],
       },
       sizeClassList: {
