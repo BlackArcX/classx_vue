@@ -1,5 +1,12 @@
 import { db } from '../../firebase';
 
+export function optionalOrderComparator(a, b) {
+  if (a.order && b.order) return a.order - b.order;
+  if (a.order) return -1;
+  if (b.order) return 1;
+  return 0;
+}
+
 export default {
   namespaced: true,
   state: {
@@ -113,7 +120,8 @@ export default {
       state.courses[course.id] = course;
     },
     setResources(state, { courseId, resources }) {
-      const categorizedResources = Object.fromEntries(resources.reduce((acc, el) => {
+      const localResources = resources.sort(optionalOrderComparator);
+      const categorizedResources = Object.fromEntries(localResources.reduce((acc, el) => {
         if (el.isHeading) {
           acc.push([el.name, []]);
         } else {
@@ -131,7 +139,7 @@ export default {
     setTasks(state, { courseId, tasks }) {
       state.tasks = {
         ...state.tasks,
-        [courseId]: tasks,
+        [courseId]: tasks.sort(optionalOrderComparator),
       };
     },
     unwatchResources(state, courseId) {
