@@ -12,9 +12,12 @@ export default {
   getters: {
     courseByCode(state) {
       return (cls, code) => Object.values(state.courses)
-        .find(
-          (e) => e.class.id === cls && e.code === code,
-        );
+        .find((e) => {
+          if (e.classes && e.classes?.length > 0) {
+            return (e.classes || []).find((c) => c.id === cls) && e.code === code;
+          }
+          return e.class.id === cls && e.code === code;
+        });
     },
     resourcesByCourseCode(state, getters) {
       return (cls, code) => state.resources[(getters.courseByCode(cls, code) || {}).id];
@@ -26,10 +29,17 @@ export default {
   actions: {
     async fetchCourse({ commit }, { cls, courseCode }) {
       const clsRef = db.doc(`/classes/${cls}`);
-      const courses = await db.collection('subjects')
+      let courses = await db.collection('subjects')
         .where('class', '==', clsRef)
         .where('code', '==', courseCode)
         .get();
+
+      if (courses.docs?.length === 0) {
+        courses = await db.collection('subjects')
+          .where('classes', 'array-contains', clsRef)
+          .where('code', '==', courseCode)
+          .get();
+      }
 
       const [course] = courses.docs;
       commit('setCourse', {
