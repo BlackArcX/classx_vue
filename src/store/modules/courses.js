@@ -15,6 +15,7 @@ export default {
     resourceObservers: {},
     tasks: {},
     tasksObservers: {},
+    loading: {},
   },
   getters: {
     courseByCode(state) {
@@ -35,7 +36,9 @@ export default {
   },
   actions: {
     async fetchCourse({ commit }, { cls, courseCode }) {
+      commit('setCourseLoading', { course: `${cls}/${courseCode}` });
       const clsRef = db.doc(`/classes/${cls}`);
+
       let courses = await db.collection('subjects')
         .where('class', '==', clsRef)
         .where('code', '==', courseCode)
@@ -53,12 +56,16 @@ export default {
         id: course.id,
         ...course.data(),
       });
+
+      commit('setCourseLoading', { course: `${cls}/${courseCode}`, loading: false });
     },
 
     async watchTasks({
       state, commit, getters, dispatch,
     }, { cls, courseCode }) {
+      commit('setCourseLoading', { course: `${cls}/${courseCode}`, level: 'tasks' });
       let courseId = (getters.courseByCode(cls, courseCode) || {}).id;
+
       if (!courseId) {
         await dispatch('fetchCourse', { cls, courseCode });
         courseId = getters.courseByCode(cls, courseCode).id;
@@ -69,6 +76,8 @@ export default {
       state.tasksObservers[courseId] = db.collection(`subjects/${courseId}/tasks`)
         .orderBy('dueDate')
         .onSnapshot((snapshot) => {
+          commit('setCourseLoading', { course: `${cls}/${courseCode}`, level: 'tasks', loading: false });
+
           const tasks = [];
           snapshot.forEach((doc) => {
             tasks.push({ id: doc.id, ...doc.data() });
@@ -84,7 +93,9 @@ export default {
     async watchResources({
       state, commit, getters, dispatch,
     }, { cls, courseCode }) {
+      commit('setCourseLoading', { course: `${cls}/${courseCode}`, level: 'resources' });
       let courseId = (getters.courseByCode(cls, courseCode) || {}).id;
+
       if (!courseId) {
         await dispatch('fetchCourse', { cls, courseCode });
         courseId = getters.courseByCode(cls, courseCode).id;
@@ -95,7 +106,9 @@ export default {
       state.resourceObservers[courseId] = db.collection(`subjects/${courseId}/resources`)
         .orderBy('date')
         .onSnapshot((snapshot) => {
+          commit('setCourseLoading', { course: `${cls}/${courseCode}`, level: 'resources', loading: false });
           const resources = [];
+
           snapshot.forEach((doc) => {
             resources.push({ id: doc.id, ...doc.data() });
           });
@@ -157,6 +170,19 @@ export default {
 
         delete state.tasksObservers[courseId];
       }
+    },
+    setCourseLoading(state, { course, loading = true, level = 'default' }) {
+      if (!state.loading[course]) {
+        state.loading[course] = {};
+      }
+
+      state.loading = {
+        ...state.loading,
+        [course]: {
+          ...state.loading[course],
+          [level]: loading
+        },
+      };
     },
   },
 };

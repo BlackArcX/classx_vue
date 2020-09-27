@@ -100,28 +100,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .loading {
-    position: relative;
-  }
-
-  .loading::before {
-    content: '';
-    height: 1rem;
-    width: 1rem;
-    border: 2px solid transparent;
-    border-top-color: currentColor;
-    border-left-color: currentColor;
-    border-radius: 50%;
-    animation: rotate 1s linear infinite;
-    transform: rotate(6deg);
-    position: relative;
-    left: -5px;
-  }
-
-  @keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-</style>

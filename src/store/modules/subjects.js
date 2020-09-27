@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     classes: {},
+    loading: {},
   },
   getters: {
     classByName(state) {
@@ -12,6 +13,7 @@ export default {
   },
   actions: {
     async fetchClassSubjects({ commit }, cls) {
+      commit('setLoading', { cls });
       const snapshot = await db.collection(`/classes/${cls}/semesters/`).get();
       let semesters = snapshot.docs.map((e) => ({ id: e.id, ...e.data() }));
 
@@ -30,11 +32,18 @@ export default {
       })))).reverse();
 
       commit('setClassSubjects', { cls, semesters });
+      commit('setLoading', { cls, loading: false });
     },
   },
   mutations: {
     setClassSubjects(state, { cls, semesters }) {
       state.classes = { ...state.classes, [cls]: semesters };
+    },
+    setLoading(state, { cls, loading = true }) {
+      state.loading = {
+        ...state.loading,
+        [cls]: loading,
+      };
     },
   },
 };

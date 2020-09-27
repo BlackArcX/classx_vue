@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "dist",
-    "site": "classresources",
+    "site": "classx",
     "ignore": [
       "firebase.json",
       "**/.*",

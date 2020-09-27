@@ -6,7 +6,6 @@ import Page from './components/Page.vue';
 
 import './registerServiceWorker';
 import './format';
-// import './components';
 
 import './styles.css';
 

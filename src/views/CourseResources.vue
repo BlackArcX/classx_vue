@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div v-if="Object.entries(resources).length === 0">
+      <loading-state v-if="isLoading" />
+      <empty-state v-else />
+    </div>
+
     <template v-for="category in Object.entries(resources)">
       <h1 :key="category[0]" class="text-md leading-6 font-medium text-on-surface py-3 mt-4">{{category[0]}}</h1>
 
@@ -46,7 +51,14 @@
 </template>
 
 <script>
+import EmptyState from '../components/EmptyState.vue';
+import LoadingState from '../components/LoadingState.vue';
+
 export default {
+  components: {
+    EmptyState,
+    LoadingState,
+  },
   data() {
     const { class: cls, course: courseCode } = this.$route.params;
 
@@ -72,6 +84,13 @@ export default {
   computed: {
     resources() {
       return this.$store.getters['courses/resourcesByCourseCode'](this.cls, this.courseCode) || {};
+    },
+    isLoading() {
+      const loadingState = this.$store.state.courses.loading[`${this.cls}/${this.courseCode}`];
+      if (typeof loadingState === 'object') {
+        return loadingState.resources || false;
+      }
+      return false;
     },
   },
   created() {

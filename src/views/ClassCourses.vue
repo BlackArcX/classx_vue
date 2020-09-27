@@ -48,15 +48,24 @@
           </ul>
         </div>
   </div>
+
+    <div v-if="classes[$route.params.class].length === 0">
+      <LoadingState v-if="isLoading" />
+      <EmptyState v-else />
+    </div>
   </Page>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import Page from '../components/Page.vue';
+import EmptyState from '../components/EmptyState.vue';
+import LoadingState from '../components/LoadingState.vue';
 
 export default {
   components: {
+    EmptyState,
+    LoadingState,
     Page,
   },
   data() {
@@ -91,6 +100,9 @@ export default {
   },
   computed: {
     ...mapState('subjects', ['classes']),
+    isLoading() {
+      return this.$store.state.subjects.loading[this.$route.params.class] || false;
+    },
   },
 };
 </script>

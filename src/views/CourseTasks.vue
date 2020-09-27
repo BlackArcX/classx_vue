@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="activeTasks.length">
+    <template v-if="activeTasks.length > 0">
       <h1 class="text-lg leading-6 font-medium text-on-surface py-3 mt-4">Active Tasks</h1>
       <div class="bg-surface shadow overflow-hidden sm:rounded-md">
         <ul>
@@ -29,7 +29,7 @@
       </div>
     </template>
 
-    <template v-if="oldTasks.length">
+    <template v-if="oldTasks.length > 0">
       <h1 class="text-lg leading-6 font-medium text-on-surface py-3 mt-4">Old Tasks</h1>
       <div v-if="oldTasks" class="bg-surface shadow overflow-hidden sm:rounded-md">
         <ul>
@@ -57,11 +57,23 @@
         </ul>
       </div>
     </template>
+
+    <div v-if="oldTasks.length === 0 && activeTasks.length === 0">
+      <loading-state v-if="isLoading" />
+      <empty-state v-else />
+    </div>
   </div>
 </template>
 
 <script>
+import EmptyState from '../components/EmptyState.vue';
+import LoadingState from '../components/LoadingState.vue';
+
 export default {
+  components: {
+    EmptyState,
+    LoadingState,
+  },
   data() {
     const { class: cls, course: courseCode } = this.$route.params;
 
@@ -79,6 +91,14 @@ export default {
     },
     oldTasks() {
       return (this.tasks || []).filter((e) => e.dueDate.toDate() < new Date());
+    },
+    isLoading() {
+      const loadingState = this.$store.state.courses.loading[`${this.cls}/${this.courseCode}`];
+      if (typeof loadingState === 'object') {
+        debugger;
+        return loadingState.tasks || false;
+      }
+      return false;
     },
   },
   created() {
