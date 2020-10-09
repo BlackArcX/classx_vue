@@ -52,10 +52,18 @@ export default {
       }
 
       const [course] = courses.docs;
-      commit('setCourse', {
-        id: course.id,
-        ...course.data(),
-      });
+      if (course) {
+        commit('setCourse', {
+          id: course.id,
+          ...course.data(),
+        });
+      } else {
+        commit('setCourse', {
+          id: `${cls}--${courseCode}`,
+          class: { id: cls },
+          code: courseCode,
+        });
+      }
 
       commit('setCourseLoading', { course: `${cls}/${courseCode}`, loading: false });
     },
@@ -180,7 +188,7 @@ export default {
         ...state.loading,
         [course]: {
           ...state.loading[course],
-          [level]: loading
+          [level]: loading,
         },
       };
     },
