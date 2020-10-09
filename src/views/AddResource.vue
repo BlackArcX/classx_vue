@@ -203,7 +203,7 @@ export default {
         };
 
         if (this.formData.ext !== 'link') {
-          info.mimeType = mime(this.formData.ext);
+          info.mimeType = mime.lookup(this.formData.ext);
         }
       }
 
