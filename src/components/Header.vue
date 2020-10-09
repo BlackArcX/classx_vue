@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky w-full top-0 dark">
+  <div class="sticky w-full top-0 dark z-10">
     <nav class="bg-primary shadow">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center h-16">
