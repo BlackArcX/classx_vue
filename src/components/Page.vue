@@ -2,24 +2,28 @@
   <div>
     <header class="bg-surface shadow-sm"
             v-if="$slots.breadcrumb || (breadcrumbLinks || breadcrumbItems || []).length > 0 || $slots['right-nav']">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">
-        <slot name="breadcrumb">
-          <breadcrumb class="py-4" :links="breadcrumbLinks || breadcrumbItems" />
-        </slot>
-        <div class="flex-1"></div>
-        <slot name="right-nav">
-          <nav class="flex" v-if="(submenuItems || []).length > 1">
-            <router-link :to="getLinkRoute(link)" v-slot="{ isActive, href, navigate }"
-              v-for="link in submenuItems" :key="getLinkId(link)">
-              <a :href="href" @click="navigate" :class="[
-                 'whitespace-no-wrap ml-4 py-4 px-4 border-b-2 font-medium text-sm leading-5 focus:outline-none',
-                 isActive ? 'border-border-light text-on-surface-80' : 'border-transparent text-on-surface-60 hover:text-on-surface-80 hover:border-border focus:border-border-dark'
-               ]">
-                {{getLinkName(link)}}
-              </a>
-            </router-link>
-          </nav>
-        </slot>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row">
+        <div class="flex-1">
+          <slot name="breadcrumb">
+            <breadcrumb class="py-4" :links="breadcrumbLinks || breadcrumbItems" />
+          </slot>
+        </div>
+
+        <div class="flex-grow md:flex-grow-0 flex md:block items-center justify-around">
+          <slot name="right-nav">
+            <nav class="flex" v-if="(submenuItems || []).length > 1">
+              <router-link :to="getLinkRoute(link)" v-slot="{ isActive, href, navigate }"
+                v-for="link in submenuItems" :key="getLinkId(link)">
+                <a :href="href" @click="navigate" :class="[
+                   'whitespace-no-wrap ml-4 first:ml-0 py-4 px-4 border-b-2 font-medium text-sm leading-5 focus:outline-none',
+                   isActive ? 'border-border-light text-on-surface-80' : 'border-transparent text-on-surface-60 hover:text-on-surface-80 hover:border-border focus:border-border-dark'
+                 ]">
+                  {{getLinkName(link)}}
+                </a>
+              </router-link>
+            </nav>
+          </slot>
+        </div>
       </div>
     </header>
 
