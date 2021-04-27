@@ -4,7 +4,7 @@ VueJs based frontend for ClassX.
 
 ## Useful Links
 
-* Website: https://classresources.web.app/
+* Website: https://classx.web.app/
 * Project issue: https://github.com/BlackArcX/classx_vue/issues
 * Contribution Guidelines: https://github.com/BlackArcX/classx_vue/blob/master/CONTRIBUTING.md
 * Contributor Code of Conduct: https://github.com/BlackArcX/classx_vue/blob/master/CODE_OF_CONDUCT.md
